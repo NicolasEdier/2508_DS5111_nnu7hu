@@ -14,7 +14,22 @@ Follow these steps to transform a bare VM into a fully functional Data Science d
 
 ### 1. Initial VM Setup
 
-Run the bootstrap script to install essential packages:
+Create the init.sh file to update/install essential packages:
+
+```bash
+nano init.sh
+```
+
+Then input these commands that includes updates and installs:
+
+```bash
+sudo apt update
+sudo apt install make -y
+sudo apt install python3.12-venv -y
+sudo apt install tree
+```
+
+Now save the init.sh files, back out, and run the bootstrap script to install essential packages:
 
 ```bash
 chmod +x scripts/init.sh
