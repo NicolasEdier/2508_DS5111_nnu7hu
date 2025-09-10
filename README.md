@@ -40,16 +40,33 @@ bash scripts/init.sh
 
 ### 2. Configure Git Credentials
 
+Create a new script that will contain our configuration settings:
+
+```bash
+nano init_git_creds.sh
+```
+
 Set up your GitHub identity for commits:
 
 ```bash
-# First, edit the script with your details
-nano scripts/init_git_creds.sh
-# Replace <your github email> and <your github user name> with your actual credentials
+!#/usr/bin/bash
 
-# Make executable and run
-chmod +x scripts/init_git_creds.sh
-bash scripts/init_git_creds.sh
+USER=<your github email>
+NAME=<your github user name>
+
+git config --global --list
+
+git config --global user.email ${USER} 
+git config --global user.name  ${NAME} 
+
+git config --global --list
+```
+
+Make executable and run:
+
+```bash
+chmod +x init_git_creds.sh
+bash init_git_creds.sh
 ```
 
 **Expected outcome:** You should see your email and username displayed twice (before and after configuration).
