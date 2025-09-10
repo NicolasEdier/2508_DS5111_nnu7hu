@@ -32,8 +32,8 @@ sudo apt install tree
 Now save the init.sh files, back out, and run the bootstrap script to install essential packages:
 
 ```bash
-chmod +x scripts/init.sh
-bash scripts/init.sh
+chmod +x init.sh
+bash init.sh
 ```
 
 **Expected outcome:** The script will update the system and install `make`, `python3.12-venv`, and `tree`. Test by running `tree` - you should see your directory structure instead of an error.
@@ -62,7 +62,7 @@ git config --global user.name  ${NAME}
 git config --global --list
 ```
 
-Make executable and run:
+Save the file, back out, then make executable and run:
 
 ```bash
 chmod +x init_git_creds.sh
@@ -80,13 +80,79 @@ git clone git@github.com:<your-username>/2508_DS5111_<your-uvaid>.git
 cd 2508_DS5111_<your-uvaid>
 ```
 
-### 4. Create Python Virtual Environment
-
-Set up an isolated Python environment with required packages:
+Once cloned and in the project repository, make a new directory "scripts":
 
 ```bash
-make update
+mkdir scripts
 ```
+
+Go into the directory and move both init files into it:
+
+```bash
+cd scripts
+mv ~/init.sh .
+mv ~/init_git_creds.sh .
+```
+
+Now you are ready to add and commit the files:
+
+```bash
+git add .
+git commit -m "saving our two init files"
+git push
+```
+
+Use `git log` and `git status` to verify that everything worked and there are no more commits in queue.
+
+Run `tree` and you should see:
+
+```bash
+├── scripts/
+│   ├── init.sh
+│   └── init_git_creds.sh
+```
+
+Verify in github that the files are correctly pushed.
+
+### 4. Create Python Virtual Environment
+
+Create a makefile:
+
+```bash
+nano makefile
+```
+
+Within that makefile add the following:
+
+```bash
+default:
+    @cat makefile
+
+env:
+    python3 -m venv env; . env/bin/activate; pip install --upgrade pip
+
+update:  env
+    . env/bin/activate; pip install -r requirements.txt
+```
+
+Note that the tabs are very important and this will not work without the tabs.
+
+You can test it with `make update` but it will not work as we are missing the requirements.txt file.
+
+To add it, do the following:
+
+```bash
+nano requirements.txt
+```
+
+Within that file add:
+
+```bash
+pandas
+numpy
+```
+
+Save and back out. Then run `make update`.
 
 **Expected outcome:** This creates a virtual environment in the `env/` directory and installs pandas and numpy.
 
@@ -103,6 +169,14 @@ pip list
 ```
 
 **Expected outcome:** You should see `(env)` in your prompt and `pandas` and `numpy` listed in the pip output.
+
+Finalize by commiting and pushing like we did earlier:
+
+```bash 
+git add .
+git commit -m "makefile and requirements.txt"
+git push
+```
 
 ## Project Structure
 
