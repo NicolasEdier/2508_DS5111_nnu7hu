@@ -28,9 +28,13 @@ wsjgainers.csv: wsjgainers.html
 wsjgainers_tstamp: wsjgainers.csv
 	mv wsjgainers.csv wsjgainers_`date +"%Y%m%d_%H%M%S"`.csv
 
-.PHONY: clean
-clean:
-	rm ygainers.html ygainers.csv wsjgainers.html wsjgainers.csv | true
+.PHONY: ygainers_clean
+ygainers_clean:
+	rm ygainers.html ygainers.csv | true
+
+.PHONY: wsjgainers_clean
+wsjgainers_clean:
+	rm wsjgainers.html wsjgainers.csv | true
 
 lint:
 	. env/bin/activate; pylint bin/normalize.py
