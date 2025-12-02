@@ -1,3 +1,5 @@
+{{ config(materialized='table') }}
+
 SELECT 
     symbol,
     COUNT(*) as occurrence_count
