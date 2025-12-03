@@ -28,3 +28,12 @@ models:
         data_tests:
           - unique
           - not_null
+
+  - name: unique_syms
+    description: "Unique stock symbols from all gainers tables"
+    columns:
+      - name: symbol
+        description: "Stock ticker symbol"
+        data_tests:
+          - unique
+          - not_null
